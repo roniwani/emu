@@ -77,6 +77,40 @@
             }
         }
 
+        /* スライドインテキスト */
+        .slide-text {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #00ff00;
+            text-shadow: 
+                0 0 10px #00ff00,
+                0 0 20px #00ff00;
+            white-space: nowrap;
+            z-index: 10;
+            opacity: 0;
+            animation: slideIn 3s ease-in-out 6s forwards;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(50px);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
         /* 雪のコンテナ */
         .snowflakes {
             position: fixed;
@@ -94,7 +128,7 @@
             color: #ffffff;
             font-size: 1.5em;
             opacity: 0.8;
-            animation: fall linear forwards;
+            animation: fall linear infinite;
         }
 
         @keyframes fall {
@@ -121,6 +155,7 @@
     <div class="container">
         <div class="background-glow"></div>
         <div class="message">emuお誕生日おめでとう</div>
+        <div class="slide-text">emuお誕生日おめでとう！いつも優しくていつもかまってくれてありがと。</div>
         <div class="snowflakes" id="snowflakes"></div>
     </div>
 
@@ -155,6 +190,31 @@
         // ページ読み込み後に雪を生成
         window.addEventListener('load', () => {
             createSnowflakes();
+            
+            // 雪が途切れないよう継続的に追加
+            setInterval(() => {
+                const snowflakesContainer = document.getElementById('snowflakes');
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.textContent = '❄';
+
+                const xPos = Math.random() * window.innerWidth;
+                const duration = 5 + Math.random() * 8;
+                const tx = (Math.random() - 0.5) * 200;
+
+                snowflake.style.left = xPos + 'px';
+                snowflake.style.setProperty('--tx', tx + 'px');
+                snowflake.style.animationDuration = duration + 's';
+                snowflake.style.fontSize = (0.5 + Math.random() * 1) + 'em';
+                snowflake.style.opacity = 0.3 + Math.random() * 0.7;
+
+                snowflakesContainer.appendChild(snowflake);
+
+                // 古い雪を削除
+                if (snowflakesContainer.children.length > 100) {
+                    snowflakesContainer.removeChild(snowflakesContainer.firstChild);
+                }
+            }, 500);
         });
     </script>
 </body>
