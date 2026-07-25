@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>emuお誕生日おめでとう</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background-color: #0a0a0a;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* メッセージテキスト */
+        .message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            font-weight: bold;
+            color: #00ff00;
+            text-shadow: 
+                0 0 10px #00ff00,
+                0 0 20px #00ff00,
+                0 0 30px #00ff00,
+                0 0 40px #00ff00;
+            white-space: nowrap;
+            z-index: 10;
+            animation: fadeInOut 6s ease-in-out forwards;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 1;
+                text-shadow: 
+                    0 0 10px #00ff00,
+                    0 0 20px #00ff00,
+                    0 0 30px #00ff00,
+                    0 0 40px #00ff00,
+                    0 0 50px #00ff00;
+            }
+            70% {
+                opacity: 1;
+                text-shadow: 
+                    0 0 10px #00ff00,
+                    0 0 20px #00ff00,
+                    0 0 30px #00ff00,
+                    0 0 40px #00ff00,
+                    0 0 50px #00ff00;
+            }
+            100% {
+                opacity: 0;
+                text-shadow: 
+                    0 0 10px #00ff00,
+                    0 0 20px #00ff00,
+                    0 0 30px #00ff00,
+                    0 0 40px #00ff00,
+                    0 0 50px #00ff00;
+            }
+        }
+
+        /* 雪のコンテナ */
+        .snowflakes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #00ff00;
+            font-size: 1.5em;
+            text-shadow: 0 0 5px #00ff00;
+            opacity: 0.8;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) translateX(var(--tx));
+                opacity: 0;
+            }
+        }
+
+        /* ネオン背景グロー */
+        .background-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 0, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ダウンロードボタン */
+        .download-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 20;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            color: #000;
+            border: 2px solid #00ff00;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 20px #00ff00;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .download-btn:hover {
+            box-shadow: 0 0 40px #00ff00;
+            transform: scale(1.05);
+        }
+
+        .download-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="background-glow"></div>
+        <div class="message">emuお誕生日おめでとう</div>
+        <div class="snowflakes" id="snowflakes"></div>
+    </div>
+
+    <!-- ダウンロードボタン -->
+    <button class="download-btn" onclick="downloadHTML()">ダウンロード</button>
+
+    <script>
+        // 雪のエフェクトを生成
+        function createSnowflakes() {
+            const snowflakesContainer = document.getElementById('snowflakes');
+            const snowflakeCount = 50;
+
+            for (let i = 0; i < snowflakeCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.textContent = '❄';
+
+                // ランダムな位置
+                const xPos = Math.random() * window.innerWidth;
+                const duration = 5 + Math.random() * 8; // 5-13秒
+                const delay = Math.random() * 4; // 0-4秒のディレイ
+                const tx = (Math.random() - 0.5) * 200; // 横方向の揺らぎ
+
+                snowflake.style.left = xPos + 'px';
+                snowflake.style.setProperty('--tx', tx + 'px');
+                snowflake.style.animationDuration = duration + 's';
+                snowflake.style.animationDelay = delay + 's';
+                snowflake.style.fontSize = (0.5 + Math.random() * 1) + 'em';
+                snowflake.style.opacity = 0.3 + Math.random() * 0.7;
+
+                snowflakesContainer.appendChild(snowflake);
+            }
+        }
+
+        // ページ読み込み後に雪を生成
+        window.addEventListener('load', () => {
+            createSnowflakes();
+        });
+
+        // HTMLファイルをダウンロード
+        function downloadHTML() {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'birthday.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
