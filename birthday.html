@@ -91,9 +91,8 @@
         .snowflake {
             position: absolute;
             top: -10px;
-            color: #00ff00;
+            color: #ffffff;
             font-size: 1.5em;
-            text-shadow: 0 0 5px #00ff00;
             opacity: 0.8;
             animation: fall linear forwards;
         }
@@ -116,35 +115,6 @@
             pointer-events: none;
             z-index: 1;
         }
-
-        /* ダウンロードボタン */
-        .download-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 20;
-            background: linear-gradient(135deg, #00ff00, #00cc00);
-            color: #000;
-            border: 2px solid #00ff00;
-            padding: 12px 24px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 0 20px #00ff00;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .download-btn:hover {
-            box-shadow: 0 0 40px #00ff00;
-            transform: scale(1.05);
-        }
-
-        .download-btn:active {
-            transform: scale(0.95);
-        }
     </style>
 </head>
 <body>
@@ -153,9 +123,6 @@
         <div class="message">emuお誕生日おめでとう</div>
         <div class="snowflakes" id="snowflakes"></div>
     </div>
-
-    <!-- ダウンロードボタン -->
-    <button class="download-btn" onclick="downloadHTML()">ダウンロード</button>
 
     <script>
         // 雪のエフェクトを生成
@@ -189,20 +156,6 @@
         window.addEventListener('load', () => {
             createSnowflakes();
         });
-
-        // HTMLファイルをダウンロード
-        function downloadHTML() {
-            const htmlContent = document.documentElement.outerHTML;
-            const blob = new Blob([htmlContent], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'birthday.html';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
     </script>
 </body>
 </html>
