@@ -34,6 +34,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            animation: fadeInOut 6s ease-in-out forwards;
+        }
+
+        .message-main {
             font-size: 4rem;
             font-weight: bold;
             color: #00ff00;
@@ -43,8 +49,16 @@
                 0 0 30px #00ff00,
                 0 0 40px #00ff00;
             white-space: nowrap;
-            z-index: 10;
-            animation: fadeInOut 6s ease-in-out forwards;
+            margin-bottom: 20px;
+        }
+
+        .message-sub {
+            font-size: 1.5rem;
+            color: #00ff00;
+            text-shadow: 
+                0 0 10px #00ff00,
+                0 0 20px #00ff00;
+            white-space: nowrap;
         }
 
         @keyframes fadeInOut {
@@ -163,7 +177,10 @@
 <body>
     <div class="container">
         <div class="background-glow"></div>
-        <div class="message">emuお誕生日おめでとう</div>
+        <div class="message">
+            <div class="message-main">emuお誕生日おめでとう</div>
+            <div class="message-sub">⚠︎まだ続きがあります少々お待ちください。</div>
+        </div>
         
         <div class="slide-text slide1">emuお誕生日おめでとう！いつも優しくていつもかまってくれてありがと。</div>
         <div class="slide-text slide2">早く会いたいよ<br>会ったら色んなことしよ！</div>
