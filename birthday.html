@@ -80,19 +80,28 @@
         /* スライドインテキスト */
         .slide-text {
             position: absolute;
-            bottom: 50px;
+            bottom: 100px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #00ff00;
             text-shadow: 
                 0 0 10px #00ff00,
                 0 0 20px #00ff00;
-            white-space: nowrap;
+            text-align: center;
+            max-width: 80%;
             z-index: 10;
             opacity: 0;
-            animation: slideIn 3s ease-in-out 6s forwards;
+            line-height: 1.8;
+            animation: slideIn 5s ease-in-out forwards;
         }
+
+        .slide-text.slide1 { animation-delay: 6s; }
+        .slide-text.slide2 { animation-delay: 11s; }
+        .slide-text.slide3 { animation-delay: 16s; }
+        .slide-text.slide4 { animation-delay: 21s; }
+        .slide-text.slide5 { animation-delay: 26s; }
+        .slide-text.slide6 { animation-delay: 31s; }
 
         @keyframes slideIn {
             0% {
@@ -107,7 +116,7 @@
             }
             100% {
                 opacity: 0;
-                transform: translateX(-50%) translateY(0);
+                transform: translateX(-50%) translateY(-50px);
             }
         }
 
@@ -155,7 +164,14 @@
     <div class="container">
         <div class="background-glow"></div>
         <div class="message">emuお誕生日おめでとう</div>
-        <div class="slide-text">emuお誕生日おめでとう！いつも優しくていつもかまってくれてありがと。</div>
+        
+        <div class="slide-text slide1">emuお誕生日おめでとう！いつも優しくていつもかまってくれてありがと。</div>
+        <div class="slide-text slide2">早く会いたいよ<br>会ったら色んなことしよ！</div>
+        <div class="slide-text slide3">元カノ6人ぐらい居てちょっと怖かったよ笑<br>一番驚いたのは外国人とも付き合ってたこと笑</div>
+        <div class="slide-text slide4">それにemu1pしてたとか<br>顔がゆで卵とか笑</div>
+        <div class="slide-text slide5">可愛いくてかっこいい<br>そんなemuがだいすき！</div>
+        <div class="slide-text slide6">何回か喧嘩したよね<br>ほんとは俺別れるか不安だったよ笑<br>これからもずっとそばにいてね！<br>だいすき！</div>
+
         <div class="snowflakes" id="snowflakes"></div>
     </div>
 
